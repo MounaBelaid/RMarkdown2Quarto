@@ -1,0 +1,16 @@
+---
+title: "R Markdown Demo File"
+output: html_document
+---
+
+# My R Markdown Document
+
+This is a simple R Markdown document.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars, echo=FALSE, eval=TRUE}
+summary(cars)
+```
