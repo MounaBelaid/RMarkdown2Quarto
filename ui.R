@@ -27,7 +27,7 @@ shinyUI(fluidPage(
       br(),
       h6(icon("circle-exclamation", style = "color: red"),
               "Take advantage of processing all the Rmd files in a selected folder only when the app is running locally."),
-      shinyDirButton("directory", "Select a folder", "Please select a folder"),
+      shinyDirButton("directory", "Select a folder", "Please select a folder only when the app is running locally"),
       tableOutput("fileTableFromFolder"),
       br(),
       div(
