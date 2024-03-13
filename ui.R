@@ -3,6 +3,7 @@ suppressPackageStartupMessages({
   library(bslib)
   library(shinyFiles)
   library(shinyAce)
+  library(shinyjs)
 })
 
 shinyUI(fluidPage(
@@ -12,6 +13,7 @@ shinyUI(fluidPage(
     primary = "#2b8cbe",
     lightness = 40
   ),
+  useShinyjs(),
   tags$img(src = "rmd_quarto.png", style = "width: 50%; height: auto;"),
   tags$style(".checkclass {color:#31a354}"),
   tags$style(".xmarkclass {color:#f03b20}"),
@@ -25,8 +27,10 @@ shinyUI(fluidPage(
       fileInput("rmdfiles", "Choose your Rmd Files", accept = ".Rmd", multiple = TRUE),
       tableOutput("fileTable"),
       br(),
-      h6(icon("circle-exclamation", style = "color: red"),
-              "Take advantage of processing all the Rmd files in a selected folder only when the app is running locally."),
+      h6(
+        icon("circle-exclamation", style = "color: red"),
+        "Take advantage of processing all the Rmd files in a selected folder only when the app is running locally."
+      ),
       shinyDirButton("directory", "Select a folder", "Please select a folder only when the app is running locally"),
       tableOutput("fileTableFromFolder"),
       br(),
