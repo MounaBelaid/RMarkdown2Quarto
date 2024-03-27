@@ -48,7 +48,7 @@ shinyServer(function(input, output, session) {
     req(rmd_files)
     process_rmd_files <- function(i) {
       extension <- file_ext(rmd_files$datapath[i])
-      icon <- ifelse(extension == "Rmd", as.character(icon("check", class = "checkclass")),
+      icon <- ifelse(tolower(extension) == "rmd", as.character(icon("check", class = "checkclass")),
         as.character(icon("xmark", class = "xmarkclass"))
       )
       dat <- data.frame(
@@ -66,7 +66,7 @@ shinyServer(function(input, output, session) {
 
   files_info_from_folder <- reactive({
     req(input$directory)
-    files_in_selected_folder <- list.files(parseDirPath(volumes, input$directory), pattern = "\\.Rmd$")
+    files_in_selected_folder <- list.files(parseDirPath(volumes, input$directory), pattern = "\\.Rmd$|\\.rmd$")
     if (length(files_in_selected_folder) > 0) {
       dat_folder <- data.frame(
         Filename = files_in_selected_folder,
@@ -98,18 +98,18 @@ shinyServer(function(input, output, session) {
       files_path <- c()
       parse_dir <- parseDirPath(volumes, input$directory)
       rmd_files <- input$rmdfiles
-      rmd_files <- rmd_files[file_ext(rmd_files$datapath) == "Rmd", , drop = FALSE]
-      files_in_folder <- list.files(parse_dir, pattern = "\\.Rmd$", full.names = TRUE)
+      rmd_files <- rmd_files[tolower(file_ext(rmd_files$datapath)) == "rmd", , drop = FALSE]
+      files_in_folder <- list.files(parse_dir, pattern = "\\.Rmd$|\\.rmd$", full.names = TRUE)
 
       if (length(files_in_folder) > 0 & length(rmd_files) > 0) {
         rmd_paths <- c(rmd_files$datapath, files_in_folder)
-        files_in_folder <- list.files(parse_dir, pattern = "\\.Rmd$")
+        files_in_folder <- list.files(parse_dir, pattern = "\\.Rmd$|\\.rmd$")
         rmd_names <- c(file_path_sans_ext(rmd_files$name), file_path_sans_ext(files_in_folder))
         rmd_names <- addNumericSuffix(rmd_names)
       } else if (length(files_in_folder) > 0) {
-        files_in_folder <- list.files(parse_dir, pattern = "\\.Rmd$", full.names = TRUE)
+        files_in_folder <- list.files(parse_dir, pattern = "\\.Rmd$|\\.rmd$", full.names = TRUE)
         rmd_paths <- files_in_folder
-        files_in_folder <- list.files(parse_dir, pattern = "\\.Rmd$")
+        files_in_folder <- list.files(parse_dir, pattern = "\\.Rmd$|\\.rmd$")
         rmd_names <- file_path_sans_ext(files_in_folder)
         rmd_names <- addNumericSuffix(rmd_names)
       } else if (length(rmd_files) > 0) {

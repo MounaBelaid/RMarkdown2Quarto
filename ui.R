@@ -24,7 +24,7 @@ shinyUI(fluidPage(
       br(), br(),
       aceEditor("demo_file_content", value = "", mode = "markdown", height = "250px"),
       br(),
-      fileInput("rmdfiles", "Choose your Rmd Files", accept = ".Rmd", multiple = TRUE),
+      fileInput("rmdfiles", "Choose your Rmd Files", accept = c(".Rmd", ".rmd"), multiple = TRUE),
       tableOutput("fileTable"),
       br(),
       h6(
