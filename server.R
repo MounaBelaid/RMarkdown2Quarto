@@ -123,7 +123,7 @@ shinyServer(function(input, output, session) {
         if ("output: pdf_document" %in% content) {
           content <- str_replace_all(content, pattern = "output: pdf_document", replacement = "format: pdf")
         } else if ("output: word_document" %in% content) {
-          content <- str_replace_all(content, pattern = "output: word_document", replacement = "format: word")
+          content <- str_replace_all(content, pattern = "output: word_document", replacement = "format: docx")
         } else if ("output: html_document" %in% content) {
           content <- str_replace_all(content, pattern = "output: html_document", replacement = "format: html")
         }
